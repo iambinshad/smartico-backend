@@ -33,8 +33,8 @@ let transporter = nodemailer.createTransport({
     service: 'Gmail',
 
     auth: {
-        user: 'herseyfreelance23@gmail.com',
-        pass: 'dpbquhuveeksnxnb',
+        user: 'smarticoapp23@gmail.com',
+        pass: 'vebppdatiwwfidha',
     }
 
 });
