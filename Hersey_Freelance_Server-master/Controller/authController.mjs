@@ -68,6 +68,8 @@ const createSendToken = (user, statusCode, res) => {
 };
 
 export const adminSignup = catchAsync(async (req, res, next) => {
+    console.log("HELLOO");
+    console.log(req.body)
     const newAdmin = await Admin.create({
         fullName : req.body.fullName,
         userName : req.body.userName,
@@ -80,7 +82,6 @@ export const adminSignup = catchAsync(async (req, res, next) => {
     createSendToken(newAdmin, 201, res);
     next()
 })
-
 
 export const OTP = catchAsync(async (req, res, next) => {
 

@@ -1,12 +1,12 @@
 import  express  from 'express'
 import { approveVendor, blockUser, blockVendor, dashboardCount, deleteCategory, getAllCategory, getAllUsers, getAllVendors, getVendorDetails, newUsers, unBlockUser } from '../Controller/adminController.mjs'
-import { addCategory, adminLogin, adminProtect }  from '../Controller/authController.mjs'
+import { addCategory,adminSignup, adminLogin, adminProtect }  from '../Controller/authController.mjs'
 
 const router = express.Router()
 
-// router
-//     .route('/adminSignup')
-//     .post(adminSignup)
+router
+    .route('/adminSignup')
+    .post(adminSignup)
 
 router
     .route('/login')
