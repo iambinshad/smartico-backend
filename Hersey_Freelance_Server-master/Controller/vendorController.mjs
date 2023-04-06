@@ -116,6 +116,7 @@ export const bookings = catchAsync(async (req, res, next) => {
 
 export const viewGigs = catchAsync(async (req, res, next) => {
     const vendorId = req.vendor._id
+    
     const viewGig = await Gig.find({ vendorId }).populate("category").sort({ date: -1 })
     res.status(200).json({
         status: "success",

@@ -298,7 +298,8 @@ export const vendorLogin = catchAsync(async (req, res, next) => {
 
 export const vendorGig = catchAsync(async (req, res, next) => {
     console.log(req.body,'38383')
-    const file = await fileUploader(req.body.image)
+    // const file = await fileUploader(req.body.image)
+    const file = req.body.image;
     //gigImage
     const newGig = await Gig.create({
         title: req.body.title,
