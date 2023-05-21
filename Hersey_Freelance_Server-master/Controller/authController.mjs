@@ -42,7 +42,7 @@ let transporter = nodemailer.createTransport({
 let otp = Math.random();
 otp = otp * 1000000;
 otp = parseInt(otp);
-console.log(otp);
+// console.log(otp);
 
 // --------------------------------------------------------------------------------------------------------------
 
@@ -53,7 +53,9 @@ const signToken = (id) => {
 };
 
 const createSendToken = (user, statusCode, res) => {
+   
     const token = signToken(user._id);
+    console.log
 
     //remove the password from the output
     user.password = undefined;
@@ -102,6 +104,7 @@ export const OTP = catchAsync(async (req, res, next) => {
             subject: "Otp for registration is: ",
             html: "<h3>OTP for account verification is </h3>" + "<h1 style='font-weight:bold;'>" + otp + "</h1>" // html body
         };
+        console.log('usersignup',otp)
 
         transporter.sendMail(mailOptions, (error, info) => {
             if (error) {
@@ -181,6 +184,7 @@ export const vendorOTP = catchAsync(async (req, res) => {
             subject: "Otp for registration is: ",
             html: "<h3>OTP for account verification is </h3>" + "<h1 style='font-weight:bold;'>" + otp + "</h1>" // html body
         };
+        console.log(otp);
 
         transporter.sendMail(mailOptions, (error, info) => {
             if (error) {
@@ -272,6 +276,7 @@ export const adminLogin = catchAsync(async (req, res, next) => {
 });
 
 export const vendorLogin = catchAsync(async (req, res, next) => {
+    console.log(req.body);
     const { email, password } = req.body;
 
     //to check email and password exist
@@ -283,7 +288,7 @@ export const vendorLogin = catchAsync(async (req, res, next) => {
     const vendor = await Vendor.findOne({
         $and: [{ email }, { status: "Approved" }],
     }).select("+password");
-    console.log(vendor);
+    
 
     if (!vendor || !(await vendor.correctPassword(password, vendor.password))) {
         res.json({
@@ -334,12 +339,13 @@ export const addCategory = catchAsync(async (req, res, next) => {
 export const bookNow = catchAsync(async (req, res, next) => {
     const userId = req.user._id
     const data = req.body
+    console.log(req.body);
     const newBooking = await Booking.create({
         userId,
-        vendorId: data.gig.vendorId._id,
-        title: data.gig.title,
+        vendorId: data.vendorId,
+        title: data.title,
         requirements: data.requirements,
-        gigId: data.gig._id
+        gigId: data.gigId
     })
     res.status(200).json({
         status: 'success',
@@ -437,6 +443,7 @@ export const getConnections = catchAsync(async (req, res, next) => {
 export const getConnectionsUser = catchAsync(async (req, res, next) => {
 
     const userId = req.params.userId
+   
     let connectionCount = []
     const connections = await Message.find({ chatUsers: userId }).sort({ createdAt: -1 })
     const connection = [];

@@ -138,10 +138,12 @@ export const vendorRating = catchAsync(async (req, res, next) => {
 export const updateUserProfile = catchAsync(async (req, res, next) => {
   const userId = req.user._id
   let { userName, dob, gender, phone, location, profilePhoto } = req.body
-  const file = await fileUploader(profilePhoto)
+  // const file = await fileUploader(profilePhoto)
+  const file = profilePhoto
   console.log(file);
   await User.findOneAndUpdate({ _id: userId }, {
     $set: {
+      
       userName,
       dob,
       gender,

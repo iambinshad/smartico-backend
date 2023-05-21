@@ -42,7 +42,7 @@ router
 
 router
     .route('/chat')
-    .post( chat)
+    .post(chat)
 
 router
     .route('/getMessage/:user1Id/:user2Id')

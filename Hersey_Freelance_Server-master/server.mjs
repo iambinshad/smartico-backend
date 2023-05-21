@@ -42,6 +42,10 @@ const io = new Server(server, {
             socket.to(sendUserSocket).emit("msg-receive", data.message)
         }
     })
+
+    socket.on('connect', () => {
+        console.log('Client Connected:', socket.id);
+    });
   
     // Handle disconnections
     socket.on('disconnect', () => {
