@@ -35,13 +35,20 @@ const io = new Server(server, {
     socket.on("addUser", (id) => {
         onlineUsers.set(id, socket.id);
     })
-  
     socket.on("send-msg", (data) => {
-        const sendUserSocket = onlineUsers.get(data.to)
+        console.log("Received send-msg event:", data);
+        const sendUserSocket = onlineUsers.get(data.to);
         if (sendUserSocket) {
-            socket.to(sendUserSocket).emit("msg-receive", data.message)
+          console.log("Emitting msg-receive event:", data.message);
+          socket.to(sendUserSocket).emit("msg-receive", { message: data.message });
         }
-    })
+      });
+    // socket.on("send-msg", (data) => {
+    //     const sendUserSocket = onlineUsers.get(data.to)
+    //     if (sendUserSocket) {
+    //         socket.to(sendUserSocket).emit("msg-receive", data.message)
+    //     }
+    // })
 
     socket.on('connect', () => {
         console.log('Client Connected:', socket.id);

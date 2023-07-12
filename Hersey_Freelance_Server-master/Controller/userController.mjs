@@ -143,7 +143,6 @@ export const updateUserProfile = catchAsync(async (req, res, next) => {
   console.log(file);
   await User.findOneAndUpdate({ _id: userId }, {
     $set: {
-      
       userName,
       dob,
       gender,

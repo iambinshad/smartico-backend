@@ -52,6 +52,7 @@ router
     .route('/getConnections/:vendorId')
     .get(vendorProtect, getConnections)
 
+
 router
     .route('/bookedGigs')
     .get(vendorProtect, bookings)
